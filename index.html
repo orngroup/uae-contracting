@@ -114,11 +114,123 @@ tr.editing td{background:#EEF5FF!important}
 .modal h3{font-size:15px;font-weight:700;color:#1F4E79;margin-bottom:12px}
 .mimg{width:100%;border-radius:7px;border:1px solid #e8e8e8;margin-bottom:12px}
 .mclose{background:none;border:1px solid #ddd;border-radius:6px;padding:5px 14px;cursor:pointer;font-size:13px;color:#666;font-family:inherit}
+.add-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:600;display:none;align-items:center;justify-content:center}
+.add-modal-bg.open{display:flex}
+.add-modal{background:#fff;border-radius:12px;padding:26px 28px;max-width:560px;width:94%;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.add-modal h3{font-size:16px;font-weight:700;color:#1F4E79;margin-bottom:18px}
+.add-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.add-form-grid label,.add-form-full label{display:block;font-size:11px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.add-form-full{margin-bottom:10px}
+.add-form-grid input,.add-form-grid select,.add-form-full input,.add-form-full select,.add-form-full textarea{width:100%;padding:7px 9px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:inherit;background:#fafafa}
+.add-form-full textarea{resize:vertical;min-height:60px}
+.add-form-grid input:focus,.add-form-grid select:focus,.add-form-full input:focus,.add-form-full select:focus,.add-form-full textarea:focus{outline:none;border-color:#1F4E79;background:#fff}
+.add-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid #e8e8e8}
+.add-save-btn{background:#1F4E79;color:#fff;border:none;border-radius:7px;padding:9px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.add-save-btn:hover{background:#185FA5}
+.add-cancel-btn{background:#fff;border:1px solid #ddd;border-radius:7px;padding:9px 18px;font-size:13px;cursor:pointer;color:#666;font-family:inherit}
+.add-cancel-btn:hover{background:#f5f5f5}
+
 .c0{width:28px}.c1{width:140px}.c2{width:65px}.c3{width:115px}.c4{width:115px}.c5{width:85px}.c6{width:105px}.c7{width:95px}.c8{width:70px}.c9{width:80px}.c10{width:80px}.c11{width:50px}
 </style>
 </head>
 <body>
 <div class="notify" id="notify"></div>
+
+<div class="add-modal-bg" id="addModal">
+  <div class="add-modal">
+    <h3>&#10133; Add New Hotel</h3>
+    <div class="add-form-grid">
+      <div>
+        <label>Hotel Name *</label>
+        <input type="text" id="ah_hotel" placeholder="e.g. Burj Al Arab">
+      </div>
+      <div>
+        <label>Brand / Group</label>
+        <input type="text" id="ah_brand" placeholder="e.g. Jumeirah Group">
+      </div>
+      <div>
+        <label>Emirate *</label>
+        <select id="ah_emirate">
+          <option value="">Select...</option>
+          <option>Dubai</option>
+          <option>Abu Dhabi</option>
+          <option>Ras Al Khaimah</option>
+          <option>Fujairah</option>
+          <option>Sharjah</option>
+          <option>Ajman</option>
+          <option>Umm Al Quwain</option>
+        </select>
+      </div>
+      <div>
+        <label>Category</label>
+        <input type="text" id="ah_category" placeholder="e.g. 5* Luxury Beach">
+      </div>
+      <div>
+        <label>GM Name</label>
+        <input type="text" id="ah_gm_name" placeholder="General Manager name">
+      </div>
+      <div>
+        <label>GM Email</label>
+        <input type="email" id="ah_gm_email" placeholder="gm@hotel.com">
+      </div>
+      <div>
+        <label>DOS Name</label>
+        <input type="text" id="ah_dos_name" placeholder="Director of Sales name">
+      </div>
+      <div>
+        <label>DOS Email</label>
+        <input type="email" id="ah_dos_email" placeholder="dos@hotel.com">
+      </div>
+      <div>
+        <label>Phone</label>
+        <input type="text" id="ah_phone" placeholder="+971 4 000 0000">
+      </div>
+      <div>
+        <label>CRM Status</label>
+        <select id="ah_status">
+          <option value="Not contacted">Not contacted</option>
+          <option value="Call done">Call done</option>
+          <option value="Meeting booked">Meeting booked</option>
+          <option value="Meeting held">Meeting held</option>
+          <option value="Rates requested">Rates requested</option>
+          <option value="Awaiting rates">Awaiting rates</option>
+          <option value="Rates received">Rates received</option>
+          <option value="Contracted">Contracted</option>
+          <option value="Not interested">Not interested</option>
+        </select>
+      </div>
+      <div>
+        <label>Allocate To</label>
+        <select id="ah_alloc">
+          <option value="">Unassigned</option>
+          <option>Ajay Kawa</option>
+          <option>Manish Suchde</option>
+          <option>Muhamed T</option>
+          <option>Yassir Ahmed</option>
+        </select>
+      </div>
+      <div>
+        <label>Source</label>
+        <select id="ah_source">
+          <option value="Manual">Manual</option>
+          <option value="API">API</option>
+        </select>
+      </div>
+      <div>
+        <label>API Name (if API)</label>
+        <input type="text" id="ah_api" placeholder="e.g. Amadeus">
+      </div>
+    </div>
+    <div class="add-form-full">
+      <label>Notes</label>
+      <textarea id="ah_notes" placeholder="Any additional notes..."></textarea>
+    </div>
+    <div class="add-footer">
+      <button class="add-cancel-btn" onclick="closeAddModal()">Cancel</button>
+      <button class="add-save-btn" onclick="saveNewHotel()">&#128190; Add Hotel</button>
+    </div>
+  </div>
+</div>
 <div class="mbg" id="cardModal"><div class="modal"><h3 id="mTitle">Card</h3><img id="mImg" class="mimg" src="" alt=""><button class="mclose" onclick="closeModal()">Close</button></div></div>
 <div class="login" id="loginScreen">
   <div class="login-box">
@@ -161,7 +273,7 @@ tr.editing td{background:#EEF5FF!important}
       <select class="fs" id="fEm" onchange="applyFilters()"><option value="">All Emirates</option><option>Dubai</option><option>Abu Dhabi</option><option>Ras Al Khaimah</option><option>Fujairah</option></select>
       <select class="fs" id="fSt" onchange="applyFilters()"><option value="">All Statuses</option><option>Not contacted</option><option>Call done</option><option>Meeting booked</option><option>Meeting held</option><option>Rates requested</option><option>Awaiting rates</option><option>Rates received</option><option>Contracted</option><option>Not interested</option></select>
       <select class="fs" id="fAl" onchange="applyFilters()"><option value="">All Team</option><option>Ajay Kawa</option><option>Manish Suchde</option><option>Muhamed T</option><option>Yassir Ahmed</option><option value="__u">Unallocated</option></select>
-      <select class="fs" id="fApi" onchange="applyFilters()"><option value="">API + Manual</option><option value="API">API only</option><option value="Manual">Manual only</option></select>
+      <select class="fs" id="fApi" onchange="applyFilters()"><option value="">API + Manual</option><option value="API">API only</option><option value="Manual">Manual only</option></select><button onclick="openAddModal()" style="padding:6px 14px;background:#1F4E79;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin-left:auto">&#10133; Add Hotel</button>
     </div>
     <div class="ss" id="sBar"></div>
     <div class="tw">
@@ -532,6 +644,76 @@ function trigContract(hid){
 }
 function storeLocal(file,role){
   var r=new FileReader();r.onload=function(e){ED[role+'_Card_URL']=e.target.result;renderTable();notify('Card saved locally');};r.readAsDataURL(file);
+}
+
+function openAddModal(){
+  // Clear all fields
+  ['ah_hotel','ah_brand','ah_gm_name','ah_gm_email','ah_dos_name','ah_dos_email','ah_phone','ah_api','ah_notes'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.value='';
+  });
+  ['ah_emirate','ah_status','ah_alloc','ah_source'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.selectedIndex=0;
+  });
+  document.getElementById('ah_status').value='Not contacted';
+  document.getElementById('addModal').classList.add('open');
+}
+function closeAddModal(){document.getElementById('addModal').classList.remove('open');}
+document.addEventListener('click',function(e){if(e.target===document.getElementById('addModal'))closeAddModal();});
+
+async function saveNewHotel(){
+  var hotel = document.getElementById('ah_hotel').value.trim();
+  var emirate = document.getElementById('ah_emirate').value;
+  if(!hotel){notify('Hotel name is required');document.getElementById('ah_hotel').focus();return;}
+  if(!emirate){notify('Please select an Emirate');document.getElementById('ah_emirate').focus();return;}
+
+  // Calculate next number
+  var maxNo = ALL.reduce(function(m,h){return Math.max(m,parseInt(h.No)||0);},0);
+  var nextNo = maxNo + 1;
+  var newId = 'h' + nextNo.toString().padStart(2,'0');
+  var now = new Date().toISOString().slice(0,10);
+
+  var newHotel = {
+    id: newId,
+    No: nextNo.toString(),
+    Hotel: hotel,
+    Brand: document.getElementById('ah_brand').value.trim(),
+    Emirate: emirate,
+    Category: document.getElementById('ah_category').value.trim(),
+    GM_Name: document.getElementById('ah_gm_name').value.trim(),
+    GM_Email: document.getElementById('ah_gm_email').value.trim(),
+    DOS_Name: document.getElementById('ah_dos_name').value.trim(),
+    DOS_Email: document.getElementById('ah_dos_email').value.trim(),
+    Phone: document.getElementById('ah_phone').value.trim(),
+    CRM_Status: document.getElementById('ah_status').value || 'Not contacted',
+    Allocated_To: document.getElementById('ah_alloc').value,
+    Source: document.getElementById('ah_source').value || 'Manual',
+    API_Name: document.getElementById('ah_api').value.trim(),
+    Notes: document.getElementById('ah_notes').value.trim(),
+    GM_Card_URL: '',
+    DOS_Card_URL: '',
+    Contract_URL: '',
+    _by: CU,
+    _at: now
+  };
+
+  ALL.push(newHotel);
+  closeAddModal();
+  applyFilters();
+  renderDash();
+  notify('Hotel added: ' + hotel);
+
+  if(db && fbOk){
+    var fbData = {};
+    Object.assign(fbData, newHotel);
+    delete fbData.id;
+    try{
+      await db.collection('hotels').doc(newId).set(fbData);
+      notify('Hotel saved to Firebase');
+    }catch(e){
+      notify('Added locally - Firebase sync error');
+      setFb(false);
+    }
+  }
 }
 function openModal(url,title){
   document.getElementById('mImg').src=url;
